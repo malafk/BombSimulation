@@ -56,9 +56,9 @@ public class QueueManager {
         queues.remove(queue);
     }
 
-    public void queuePlayer(String queueString, Player player) {
+    public void queuePlayer(Player player) {
         if (isQueued(player)) {
-            player.sendMessage(ChatUtil.clr("&7You are already in a queue! Type &c/simulation &7remove to queue for another game!"));
+            player.sendMessage(ChatUtil.clr("&7You are already in a queue! Type &c/simulation &cleave &7to leave queue!"));
             return;
         }
         Queue queue = new Queue(player.getUniqueId(), this);

@@ -2,4 +2,4 @@ name: BombSimulation
 version: '${project.version}'
 main: lol.maltest.bombsimulation.BombSimulation
 api-version: 1.19
-description: For my server 
+description: For my server
