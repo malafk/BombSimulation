@@ -1,6 +1,7 @@
 package lol.maltest.bombsimulation.simulation.model;
 
 import lol.maltest.bombsimulation.BombSimulation;
+import lol.maltest.bombsimulation.util.ChatUtil;
 import lol.maltest.bombsimulation.util.SimUtil;
 import lombok.AllArgsConstructor;
 import org.bukkit.*;
@@ -54,7 +55,6 @@ public class Simulation {
                 for(int i = 0; i <= blocksOfArea.size() / 40; i++) {
                     System.out.println(blocksOfArea.size());
                     if(blocksOfArea.size() == 1) {
-                        System.out.println("spawned all blocsk spawning entities");
                         spawnEntities();
                         cancel();
                         return;
@@ -75,14 +75,13 @@ public class Simulation {
     private void spawnEntities() {
         for(Entity e : entitiesOfArea) {
             if(e.getType().equals(EntityType.PLAYER)) continue;
-            Entity entity = world.spawnEntity(new Location(world, e.getLocation().getX(), e.getLocation().getY(), e.getLocation().getZ()), e.getType());
-            System.out.println("spawned a " + e.getType() +" at " + entity.getLocation());
+            world.spawnEntity(new Location(world, e.getLocation().getX(), e.getLocation().getY(), e.getLocation().getZ()), e.getType());
         }
         bomb();
     }
 
     private void bomb() {
-        Bukkit.broadcastMessage("Bombing the area");
+        simulationPlayer.sendMessage(ChatUtil.clr("&cBombing the simulation"));
         World world = Bukkit.getWorld("simulations");
         Location location = new Location(world, originalLocation.getX(), originalLocation.getY(), originalLocation.getZ());
         SimUtil.spawnBombs(5, location, world);
@@ -91,13 +90,13 @@ public class Simulation {
         new BukkitRunnable() {
             @Override
             public void run() {
-                Bukkit.broadcastMessage("Deleting");
                 delete();
             }
-        }.runTaskLater(plugin, 20 * 10);
+        }.runTaskLater(plugin, 20 * 20);
     }
 
     public void delete() {
+        simulationPlayer.sendMessage(ChatUtil.clr("&cDeleting simulation"));
         new BukkitRunnable() {
             @Override
             public void run() {
