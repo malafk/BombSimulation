@@ -42,7 +42,6 @@ public class Queue {
     }
 
     public void tryStart() {
-        System.out.println(pos());
         if(!pos().startsWith("0")) return;
         queueManager.plugin.simulationManager.startSimulation(Bukkit.getPlayer(playerUuid));
     }

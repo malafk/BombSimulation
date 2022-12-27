@@ -53,7 +53,6 @@ public class Simulation {
             @Override
             public void run() {
                 for(int i = 0; i <= blocksOfArea.size() / 40; i++) {
-                    System.out.println(blocksOfArea.size());
                     if(blocksOfArea.size() == 1) {
                         spawnEntities();
                         cancel();
@@ -90,18 +89,17 @@ public class Simulation {
         new BukkitRunnable() {
             @Override
             public void run() {
+                simulationPlayer.sendMessage(ChatUtil.clr("&cDeleting simulation"));
                 delete();
             }
         }.runTaskLater(plugin, 20 * 20);
     }
 
     public void delete() {
-        simulationPlayer.sendMessage(ChatUtil.clr("&cDeleting simulation"));
         new BukkitRunnable() {
             @Override
             public void run() {
                 for(int i = 0; i <= blocksPlaced.size() / 10; i++) {
-                    System.out.println(blocksPlaced.size());
                     if(blocksPlaced.size() == 1) {
                         plugin.simulationManager.endSimulation(playerUuid, false);
                         cancel();

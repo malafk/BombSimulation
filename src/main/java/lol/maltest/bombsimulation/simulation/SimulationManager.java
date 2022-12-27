@@ -45,6 +45,7 @@ public class SimulationManager {
         }
         Player player = Bukkit.getPlayer(playerUuid);
         player.sendMessage(ChatUtil.clr("&cSimulation has ended"));
+        System.out.println(player.getName() + " " + simulation.originalLocation);
         player.teleport(simulation.originalLocation);
         player.setGameMode(GameMode.SURVIVAL);
         plugin.queueManager.getQueue(player).deleteQueue();

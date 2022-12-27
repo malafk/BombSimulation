@@ -17,17 +17,19 @@ public class SimulationListener implements Listener {
 
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
-        if(!e.getPlayer().getWorld().getName().equals("simulations")) return;
-        if(e.getPlayer().isOp()) return;
-        e.setCancelled(true);
+        if (e.getPlayer().isOp()) return;
+        if (!e.getPlayer().getWorld().getName().equals("simulations")) return;
+        if (e.getCause().equals(PlayerTeleportEvent.TeleportCause.COMMAND) || e.getCause().equals(PlayerTeleportEvent.TeleportCause.SPECTATE)) {
+            e.setCancelled(true);
+        }
     }
 
     @EventHandler
     public void onQuitEvent(PlayerQuitEvent e) {
-        if(plugin.queueManager.isQueued(e.getPlayer())) {
+        if (plugin.queueManager.isQueued(e.getPlayer())) {
             plugin.queueManager.removeQueue(plugin.queueManager.getQueue(e.getPlayer()));
         }
-        if(plugin.simulationManager.getSimulation(e.getPlayer().getUniqueId()) != null) {
+        if (plugin.simulationManager.getSimulation(e.getPlayer().getUniqueId()) != null) {
             plugin.simulationManager.endSimulation(e.getPlayer().getUniqueId(), true);
         }
     }

@@ -20,7 +20,7 @@ public class BlockListener implements Listener {
     @EventHandler
     public void onEntityExplode(ExplosionPrimeEvent e) {
         if(e.getEntity().getType() == EntityType.PRIMED_TNT) {
-            e.getEntity().getLocation().createExplosion(150);
+            e.getEntity().getLocation().createExplosion(75);
         }
     }
 }
